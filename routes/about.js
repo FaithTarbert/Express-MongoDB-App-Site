@@ -8,7 +8,7 @@ const Cubes = require('../models/cube');
 /* GET home page. */
 router.get('/', function(req, res, next) {
   Cubes.find().then((cubes) => {
-    res.render('index', {title:"Cubicle", cubes: cubes});
+    res.render('about', {title:"About", user : req.user});
   });
 });
 

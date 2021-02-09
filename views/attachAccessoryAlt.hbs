@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Attach Accessory</title>
+  <link href="/stylesheets/site.css" type="text/css" rel="stylesheet">
+  <link rel='shortcut icon' type='image/x-icon' href='../images/favicon.png' />
+</head>
+
+<body>
+  <div class="container">
+    <header>
+      <ul>
+        <li><img class="logo" src="../images/logo.png"></li>
+        <li><a href="/">Browse</a></li>
+        <li><a href="/about">About</a></li>
+        <li><a href="/create">Add a Cube</a></li>
+        <li><a href="/create/accessory">Add Accessory</a></li>
+        <li><a href="/logout">Logout</a></li>
+        <li><a href="/login">Login</a></li>
+        <li><a href="/register">Register</a></li>
+      </ul>
+    </header>
+    <main>
+      <h1>Attach A New Accessory</h1>
+      <div class="form">
+        <h2>{{cube.name}}</h2>
+        <img class="cube" src="{{cube.imageUrl}}">
+        {{#if cube.accessories}}
+        <form action='/accessory/attach/{{cube._id}}' method="post">
+        {{#if menuAccessories}}
+            <label for="accessory">{{title}}</label>
+            <select id="accessory" name="accessory">
+                {{#each menuAccessories}}
+                    <option value={{_id}}>{{this.name}}</option>
+                {{/each}}
+            </select>
+            <input type="submit" value="Attach">
+        {{else}}
+            <div class="details">
+                <h2 align="center">This cube has all the accessories!</h2>
+            </div>
+        {{/if}}
+    </form>
+        {{#if cube.accessories}}
+          <h2>Attached Accessories:</h2>
+          <ul>
+              {{#each cube.accessories}}
+              <li><h3>{{name}}</h3></li>
+              {{/each}}
+          </ul>
+        {{else}}
+            {{#if menuAccessories}}
+                <h3 class="italic">No accessories added yet...</h3>
+            {{else}}
+                <!--if no accessories added to this cube yet... -->
+                <h3 class="italic">First Add Accessories...</h3>
+            {{/if}}
+        {{/if}}
+        <a class="btn" href="/">Back</a>
+      </div>
+    </main>
+  </div>
+  <footer>@Cubicle: Exercise for Express.js and Handlebars</footer>
+
+</body>
+
+</html>
