@@ -9,13 +9,14 @@ const Cube = require('../models/cube');
 
 /* GET users listing. */
 router.get('/:id', function(req, res, next) {
+  // if(err) throw (err);
   let id = req.params.id;
-  Cube.findOne({_id: id})
+  Cube.findOne({_id: id}).populate('accessories')
     .then((results) => {
       console.log("The single cube results from the details get route is ", results);
       console.log("the accessories results from the details get route is ", results.accessories);
-      let accessories = results.accessories;
-      res.render('details', {cube: results, accessories: results, user : req.user});
+      // let accessories = results.accessories;
+      res.render('details', {cube: results, accessories: results.accessories, user : req.user});
     });
 });
 

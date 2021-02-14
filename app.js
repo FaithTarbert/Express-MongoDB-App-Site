@@ -22,8 +22,12 @@ var aboutRouter = require('./routes/about');
 var registerRouter = require('./routes/register');
 var loginRouter = require('./routes/login');
 var attachRouter = require('./routes/attach');
+var deleteRouter = require('./routes/delete');
+var editRouter = require('./routes/edit');
+var searchRouter = require('./routes/search');
 //don't need this route when using button/passport to logout manually
 // var logoutRouter = require('./routes/logout');
+
 //require express
 var app = express();
 
@@ -38,7 +42,7 @@ mongoose.connect(process.env.DB_URI,  {
   .then((res) => console.log('db connected!'))
   .catch((err) => console.log(err));
 
-  //passport config
+  //passport config (no platform)
   app.use(require('express-session')({
     secret: process.env.EXP_SESSION_SECRET,
     resave: false,
@@ -62,14 +66,18 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+//authentication - not using now
+app.use('/users', usersRouter);
 app.use('/', indexRouter);
-app.use('/users', usersRouter);//authentication - not using now
 app.use('/create', createRouter);
 app.use('/details', detailsRouter);
 app.use('/about', aboutRouter);
 app.use('/register', registerRouter);
 app.use('/login', loginRouter);
 app.use('/accessory/attach', attachRouter);
+app.use('/delete', deleteRouter);
+app.use('/edit', editRouter);
+app.use('/search', searchRouter);
 // app.use('/logout', logoutRouter);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -84,7 +92,7 @@ app.use(function(err, req, res, next) {
 
   // render the error page
   res.status(err.status || 500);
-  res.render('error');
+  res.render('404');
 });
 
 module.exports = app;

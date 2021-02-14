@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Register Page</title>
-  <link href="../stylesheets/site.css" type="text/css" rel="stylesheet">
+  <link href="/stylesheets/site.css" type="text/css" rel="stylesheet">
   <link rel='shortcut icon' type='image/x-icon' href='../images/favicon.png' />
 </head>
 
@@ -22,6 +22,13 @@
         <li><a href="/register">Register</a></li>
       </ul>
     </header>
+    {{#if errors}}
+        <div id="notifications">
+                {{#each errors}}
+                    <p id="notification-message">{{this.msg}}</p>
+                {{/each}}
+        </div>
+    {{/if}}
     <main>
 	<h1>Register Form</h1>
 <div class="form">
