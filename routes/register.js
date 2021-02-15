@@ -35,11 +35,11 @@ router.post('/',
     try {
         var displayErr;
         const errors = validationResult(req);
-        console.log(errors);
+        // console.log(errors);
         if(!errors.isEmpty()){
             errors.array().forEach(error => {
                 displayErr = error.msg;
-                console.log(displayErr);                
+                // console.log(displayErr);       
             });
             res.render('registerPage', {errors: errors.array()});
             return;
@@ -49,11 +49,13 @@ router.post('/',
         if(validateErrs == undefined && req.body.password === req.body.repeatPassword){
             User.register(new User({ username : req.body.username }), req.body.password, function(err, user) {
             if (err) {
-                console.log(err);
+                res.render('registerPage', {err: err});
+                // console.log('this is error 1', err);
             } else {
                 passport.authenticate('local')(req, res, function () {
                     req.session.save(function(err) {
                         if (err) {
+                            // console.log('this is error 2', err);
                             return next(err);
                         }
                         // console.log('the User is', user);
