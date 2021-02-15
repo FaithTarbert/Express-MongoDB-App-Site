@@ -25,6 +25,7 @@ var attachRouter = require('./routes/attach');
 var deleteRouter = require('./routes/delete');
 var editRouter = require('./routes/edit');
 var searchRouter = require('./routes/search');
+
 //don't need this route when using button/passport to logout manually
 // var logoutRouter = require('./routes/logout');
 
@@ -58,7 +59,7 @@ mongoose.connect(process.env.DB_URI,  {
 // view engine setup to handlebars/hbs
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
-// hbs.registerPartials("./views/partials");
+hbs.registerPartials("./views/partials");
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -79,6 +80,7 @@ app.use('/delete', deleteRouter);
 app.use('/edit', editRouter);
 app.use('/search', searchRouter);
 // app.use('/logout', logoutRouter);
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));

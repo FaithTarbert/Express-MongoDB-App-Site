@@ -1,37 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-  <meta charset="UTF-8">
-  <title>Cubicle</title>
-  <link href="/stylesheets/site.css" type="text/css" rel="stylesheet">
-  <link rel='shortcut icon' type='image/x-icon' href='../images/favicon.png' />
-</head>
-
-<body>
-  <div class="container">
-    <header>
-      {{#if user}}      
-      <ul>
-        <li><img class="logo" src="../images/logo.png"></li>
-        <li><a href="/">Browse</a></li>
-        <li><a href="/about">About</a></li>
-        <li><a href="/create">Add a Cube</a></li>
-        <li><a href="/create/accessory">Add Accessory</a></li>
-        <li><a href="/logout">Logout</a></li>
-      </ul>
-      {{else}}
-      <ul>
-        <li><img class="logo" src="../images/logo.png"></li>
-        <li><a href="/">Browse</a></li>
-        <li><a href="/about">About</a></li>
-        <li><a href="/login">Login</a></li>
-        <li><a href="/register">Register</a></li>
-        </ul>
-      {{/if}}
-    </header>
-    <main>
-      <h1>Browser {{title}}</h1>
+<h1>Browser {{title}}</h1>
 <form action="/search/" method="GET">
 <input type="text" class="search" name="search" placeholder="Search...">
 <input type="number" name="from" class="difficulty" placeholder="Difficulty from...">
@@ -41,7 +8,7 @@
 </form>
 <br>
 {{#each cube}}
-<div class="cube">
+<div class="cube" style="text-align: center;">
     <img class="cube" src="{{this.imageUrl}}">
     <p class="name">{{this.name}}</p>
     <p><span>Difficulty level:</span>{{this.difficulty}}</p>
@@ -51,10 +18,3 @@
 {{else}}
 <h2> No Cubes found</h2>
 {{/each}}
-
-    </main>
-  </div>
-  <footer>@Cubicle Project | Faith T.</footer>
-</body>
-
-</html>
